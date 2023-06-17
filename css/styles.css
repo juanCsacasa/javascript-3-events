@@ -1,0 +1,13 @@
+.nav{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.nav-buttons{
+  background-color: lightskyblue;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
