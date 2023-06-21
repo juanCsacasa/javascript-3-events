@@ -1,33 +1,64 @@
-export function createEventElement(event) {
-    const eventElement = document.createElement('div');
-    eventElement.classList.add('event');
-  
-    const imageElement = document.createElement('img');
-    imageElement.src = event.image;
-    eventElement.appendChild(imageElement);
-  
-    const titleElement = document.createElement('div');
-    titleElement.classList.add('event-title');
-    titleElement.textContent = event.title;
-    eventElement.appendChild(titleElement);
-  
-    const dateElement = document.createElement('div');
-    dateElement.classList.add('event-info');
-    const date = new Date(event.date);
-    const formattedDate = `${date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}, ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
-    dateElement.textContent = formattedDate;
-    eventElement.appendChild(dateElement);
-  
-    const locationElement = document.createElement('div');
-    locationElement.classList.add('event-info');
-    locationElement.textContent = `${event.location.place} • ${event.location.city}, ${event.location.state}`;
-    eventElement.appendChild(locationElement);
-  
-    const priceElement = document.createElement('div');
-    priceElement.classList.add('event-price');
-    priceElement.textContent = event.price === 0 ? 'Free' : `$${event.price.toFixed(2)}`;
-    eventElement.appendChild(priceElement);
-  
-    return eventElement;
+import { eventCache } from "./proxy.js";
+
+const categories = ['music', 'sports', 'business', 'food', 'art'];
+const eventContainer = document.getElementById('event');
+
+async function renderEvents(category) {
+  try {
+    const events = await eventCache[category]; // Esperar a que se resuelva la promesa
+    displayEvents(events);
+  } catch (error) {
+    console.error(error);
   }
-  
+}
+
+function handleCategoryChange(category) {
+  return function (event) {
+    event.preventDefault();
+    renderEvents(category);
+  }
+}
+
+function displayEvents(events) {
+  eventContainer.innerHTML = '';
+
+  for (const event of events) {
+    const eventElement = createEventElement(event);
+    eventContainer.appendChild(eventElement);
+  }
+}
+
+function createEventElement(event) {
+  const eventElement = document.createElement('div');
+  eventElement.classList.add('event');
+
+  eventElement.innerHTML = `
+    <img class="event-image" src="${event.image}">
+    <h2 class="event-title">${event.title}</h2>
+    <p class="event-date">${formatDate(event.date)}</p>
+    <p class="event-location">${formatLocation(event.location)}</p>
+    <p class="event-price">${formatPrice(event.price)}</p>
+  `;
+
+  return eventElement;
+}
+
+function formatDate(date) {
+  const options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  const formattedDate = new Date(date).toLocaleString('en-US', options);
+  return formattedDate;
+}
+
+function formatLocation(location) {
+  return `${location.address} • ${location.city}, ${location.state}`;
+}
+
+function formatPrice(price) {
+  if (price === 0) {
+    return 'Free';
+  } else {
+    return '$' + price.toFixed(2);
+  }
+}
+
+export{handleCategoryChange, renderEvents}
