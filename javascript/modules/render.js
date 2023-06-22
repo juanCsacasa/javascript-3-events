@@ -1,11 +1,10 @@
 import { eventCache } from "./proxy.js";
 
-const categories = ['music', 'sports', 'business', 'food', 'art'];
 const eventContainer = document.getElementById('event');
 
 async function renderEvents(category) {
   try {
-    const events = await eventCache[category]; // Esperar a que se resuelva la promesa
+    const events = await eventCache[category];
     displayEvents(events);
   } catch (error) {
     console.error(error);
