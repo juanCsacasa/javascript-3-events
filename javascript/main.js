@@ -1,9 +1,12 @@
+import { buttonsEvents } from "./config/buttons.js";
 import { renderEvents , handleCategoryChange } from "./modules/render.js";
 
-document.getElementById('music').addEventListener('click', handleCategoryChange('music'));
-document.getElementById('sports').addEventListener('click', handleCategoryChange('sports'));
-document.getElementById('business').addEventListener('click', handleCategoryChange('business'));
-document.getElementById('food').addEventListener('click', handleCategoryChange('food'));
-document.getElementById('art').addEventListener('click', handleCategoryChange('art'));
+buttonsEvents();
+
+const categoryButtons = document.querySelectorAll('.nav-buttons');
+categoryButtons.forEach(button => {
+  button.addEventListener('click', handleCategoryChange(button.dataset.category));
+});
+
 
 renderEvents('music');

@@ -2,10 +2,10 @@ import { fetchData } from "../api/api.js";
 
 const eventCache = new Proxy({}, {
   get(target, category) {
-    if (!target[category]) {
-      target[category] = fetchData(category)
+    if (!Reflect.has(target, category)) {
+      return fetchData(category)
         .then(events => {
-          target[category] = events;
+          Reflect.set(target, category, events);
           return events;
         })
         .catch(error => {
@@ -13,7 +13,7 @@ const eventCache = new Proxy({}, {
           throw new Error('Error al obtener los eventos');
         });
     }
-    return target[category];
+    return Reflect.get(target, category);
   }
 });
 

@@ -37,6 +37,8 @@ function createEventElement(event) {
     <p class="event-date">${formatDate(event.date)}</p>
     <p class="event-location">${formatLocation(event.location)}</p>
     <p class="event-price">${formatPrice(event.price)}</p>
+    <button>interested</button>
+    <button>going</button>
   `;
 
   return eventElement;
