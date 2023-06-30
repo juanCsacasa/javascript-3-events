@@ -1,5 +1,21 @@
+header{
+  background-color: black;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.arrow{
+  display: flex;
+  justify-content: end;
+}
+
 .nav {
-  background-color: #b4d7d2;
+  background-color: black;
   padding: 10px;
   border-radius: 10px;
   display: flex;
@@ -58,12 +74,21 @@
   margin-bottom: 5px;
 }
 
-
-
-
 .event-container{
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
+
+.heart {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  transition: fill 0.3s ease;
+}
+
+.heart.filled {
+  fill: #FF0000;
+}
+

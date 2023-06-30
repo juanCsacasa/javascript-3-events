@@ -5,16 +5,4 @@ async function fetchData(category) {
   return data;
 }
 
-async function getEventById(eventId) {
-  try {
-    // Realizar una solicitud al API para obtener los detalles del evento por su ID
-    const response = await fetch(`https://api.example.com/events/${eventId}`);
-    const event = await response.json();
-    
-    return event;
-  } catch (error) {
-    throw new Error('Error al obtener los detalles del evento');
-  }
-}
-
-export {fetchData, getEventById}
+export {fetchData}
