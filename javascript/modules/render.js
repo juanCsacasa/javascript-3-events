@@ -1,4 +1,5 @@
-import { eventCache } from "./proxy.js";
+import { eventCache } from "../patrons/proxy.js";
+import { formatDate, formatLocation, formatPrice} from "../utils/format.js";
 
 const eventContainer = document.getElementById('event');
 
@@ -37,29 +38,12 @@ function createEventElement(event) {
     <p class="event-date">${formatDate(event.date)}</p>
     <p class="event-location">${formatLocation(event.location)}</p>
     <p class="event-price">${formatPrice(event.price)}</p>
-    <button>interested</button>
-    <button>going</button>
+    <button class="interested-event" data-event-id="${event.id}">interested</button>
+    <button class="going-event" data-event-id="${event.id}">going</button>
+    <button class="love-event" data-event-id="${event.id}">love</button>
   `;
 
   return eventElement;
-}
-
-function formatDate(date) {
-  const options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-  const formattedDate = new Date(date).toLocaleString('en-US', options);
-  return formattedDate;
-}
-
-function formatLocation(location) {
-  return `${location.address} • ${location.city}, ${location.state}`;
-}
-
-function formatPrice(price) {
-  if (price === 0) {
-    return 'Free';
-  } else {
-    return '$' + price.toFixed(2);
-  }
 }
 
 export{handleCategoryChange, renderEvents}
