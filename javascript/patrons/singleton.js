@@ -1,32 +1,25 @@
-class State {
-  constructor() {
-    if (State.instance) {
-      return State.instance;
-    }
-    this.favorites = [];
-    this.interested = [];
-    this.going = [];
-    State.instance = this;
-  }
+let state = {
+  favorites: [],
+  interested: [],
+  going: [],
+};
 
-  favorite(event) {
-    if (!this.favorites.includes(event)) {
-      this.favorites.push(event);
-    }
+function getState() {
+  const storedState = localStorage.getItem("state");
+  if (storedState) {
+    return JSON.parse(storedState);
   }
-
-  interested(event) {
-    if (!this.interested.includes(event)) {
-      this.interested.push(event);
-    }
-  }
-
-  going(event) {
-    if (!this.going.includes(event)) {
-      this.going.push(event);
-    }
-  }
+  return { ...state };
 }
 
-const state = new State();
-export default state;
+function updateState(newState) {
+  state = { ...state, ...newState };
+  localStorage.setItem("state", JSON.stringify(state));
+}
+
+const singleton = {
+  getState,
+  updateState,
+};
+
+export { singleton };
