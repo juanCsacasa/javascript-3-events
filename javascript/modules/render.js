@@ -1,7 +1,8 @@
 import { eventCache } from "../patrons/proxy.js";
-import { formatDate, formatLocation, formatPrice} from "../utils/format.js";
+import { formatDate, formatLocation, formatPrice } from "../utils/format.js";
+{}
 
-const eventContainer = document.getElementById('event');
+const eventContainer = document.getElementById("event");
 
 async function renderEvents(category) {
   try {
@@ -13,14 +14,14 @@ async function renderEvents(category) {
 }
 
 function handleCategoryChange(category) {
-  return function (event) {
+  return function(event) {
     event.preventDefault();
     renderEvents(category);
-  }
+  };
 }
 
 function displayEvents(events) {
-  eventContainer.innerHTML = '';
+  eventContainer.innerHTML = "";
 
   for (const event of events) {
     const eventElement = createEventElement(event);
@@ -43,7 +44,31 @@ function createEventElement(event) {
     <button class="love-event" data-event-id="${event.id}">love</button>
   `;
 
+  // const interestedButton = eventElement.querySelector('.interested-event');
+  // interestedButton.addEventListener('click', handleButtonClick);
+
+  // const goingButton = eventElement.querySelector('.going-event');
+  // goingButton.addEventListener('click', handleButtonClick);
+
+  // const loveButton = eventElement.querySelector('.love-event');
+  // loveButton.addEventListener('click', handleButtonClick);
+
   return eventElement;
 }
 
-export{handleCategoryChange, renderEvents}
+function createEventElementAccount(event) {
+  const eventElement = document.createElement("div");
+  eventElement.classList.add("event");
+
+  eventElement.innerHTML = `
+    <img class="event-image" src="${event.image}">
+    <h2 class="event-title">${event.title}</h2>
+    <p class="event-date">${formatDate(event.date)}</p>
+    <p class="event-location">${formatLocation(event.location)}</p>
+    <p class="event-price">${formatPrice(event.price)}</p>
+  `;
+
+  return eventElement;
+};
+
+export { handleCategoryChange, renderEvents, createEventElement, createEventElementAccount};
