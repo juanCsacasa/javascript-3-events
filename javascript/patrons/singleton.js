@@ -1,25 +1,32 @@
-let state = {
-  favorites: [],
-  interested: [],
-  going: [],
-};
-
-function getState() {
-  const storedState = localStorage.getItem("state");
-  if (storedState) {
-    return JSON.parse(storedState);
+class State {
+  constructor() {
+    if (State.instance) {
+      return State.instance;
+    }
+    this.favorites = [];
+    this.interested = [];
+    this.going = [];
+    State.instance = this;
   }
-  return { ...state };
+
+  favorite(event) {
+    if (!this.favorites.includes(event)) {
+      this.favorites.push(event);
+    }
+  }
+
+  interested(event) {
+    if (!this.interested.includes(event)) {
+      this.interested.push(event);
+    }
+  }
+
+  going(event) {
+    if (!this.going.includes(event)) {
+      this.going.push(event);
+    }
+  }
 }
 
-function updateState(newState) {
-  state = { ...state, ...newState };
-  localStorage.setItem("state", JSON.stringify(state));
-}
-
-const singleton = {
-  getState,
-  updateState,
-};
-
-export { singleton };
+const state = new State();
+export default state;

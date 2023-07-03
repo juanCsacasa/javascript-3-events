@@ -1,12 +1,16 @@
 import { buttonsEvents } from "./config/buttons.js";
-import { handleButtonClick } from "./modules/ids.js";
-import { renderEvents } from "./modules/render.js";
+import { renderEvents , handleCategoryChange } from "./modules/render.js";
+import { handleInterestedClick } from "./modules/interested.js";
 
 buttonsEvents();
 
-document.querySelectorAll(".nav-buttons").forEach(button => {
-    button.addEventListener("click", handleButtonClick);
-  });
+const categoryButtons = document.querySelectorAll('.nav-buttons');
+categoryButtons.forEach(button => {
+  button.addEventListener('click', handleCategoryChange(button.dataset.category));
+});
+
+
+const interestedButton = document.querySelector('.interested-event');
+interestedButton.addEventListener('click', handleInterestedClick);
 
 renderEvents('music');
-
