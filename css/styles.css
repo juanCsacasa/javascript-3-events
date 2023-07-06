@@ -92,3 +92,71 @@ a{
   fill: #FF0000;
 }
 
+
+/* calendar */
+#calendar{  
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+#calendar h2 {
+  text-align: center;
+  margin: 0;
+  padding: 20px 0; 
+  font-size: 24px;
+}
+
+#calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#calendar th,
+#calendar td {
+  padding: 20px;
+  text-align: center;
+  font-size: 18px; 
+}
+
+#calendar th {
+  background-color: #eee;
+}
+
+#calendar td {
+  border: 1px solid #ccc;
+}
+
+#calendar td:hover {
+  background-color: #f5f5f5;
+}
+
+/* Estilos para los botones de navegación */
+#calendar .nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px; 
+  color: black;
+  cursor: pointer;
+}
+
+#calendar .nav-button svg {
+  width: 20px; 
+  height: 20px;
+  fill: black;
+}
+
+.calendar-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
