@@ -1,6 +1,7 @@
 import { eventCache } from "../patrons/proxy.js";
 import { formatDate, formatLocation, formatPrice } from "../utils/format.js";
-{}
+import { handleFavoriteButtonClick, handleInterestedButtonClick,handleGoingButtonClick} from "./favorites.js";
+
 
 const eventContainer = document.getElementById("event");
 
@@ -44,23 +45,24 @@ function createEventElement(event) {
     <button class="love-event" data-event-id="${event.id}">love</button>
   `;
 
-  // const interestedButton = eventElement.querySelector('.interested-event');
-  // interestedButton.addEventListener('click', handleButtonClick);
+  const interestedButton = eventElement.querySelector('.interested-event');
+  interestedButton.addEventListener('click', handleInterestedButtonClick);
 
-  // const goingButton = eventElement.querySelector('.going-event');
-  // goingButton.addEventListener('click', handleButtonClick);
+  const goingButton = eventElement.querySelector('.going-event');
+  goingButton.addEventListener('click', handleGoingButtonClick);
 
-  // const loveButton = eventElement.querySelector('.love-event');
-  // loveButton.addEventListener('click', handleButtonClick);
+  const loveButton = eventElement.querySelector('.love-event');
+  loveButton.addEventListener('click', handleFavoriteButtonClick);
 
   return eventElement;
 }
 
-function createEventElementAccount(event) {
-  const eventElement = document.createElement("div");
-  eventElement.classList.add("event");
+function renderEventCard(event) {
+  const eventContainer = document.getElementById('event');
 
-  eventElement.innerHTML = `
+  const card = document.createElement('div');
+  card.classList.add('event-card');
+  card.innerHTML = `
     <img class="event-image" src="${event.image}">
     <h2 class="event-title">${event.title}</h2>
     <p class="event-date">${formatDate(event.date)}</p>
@@ -68,7 +70,7 @@ function createEventElementAccount(event) {
     <p class="event-price">${formatPrice(event.price)}</p>
   `;
 
-  return eventElement;
-};
+  eventContainer.appendChild(card);
+}
 
-export { handleCategoryChange, renderEvents, createEventElement, createEventElementAccount};
+export { handleCategoryChange, renderEvents, createEventElement, renderEventCard};

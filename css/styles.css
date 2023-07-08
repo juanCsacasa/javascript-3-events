@@ -94,7 +94,7 @@ a{
 
 
 /* calendar */
-#calendar{  
+.calendar-container{  
   font-family: Arial, sans-serif;
   width: 100%;
   max-width: 800px; 
@@ -104,39 +104,39 @@ a{
   background-color: #f9f9f9;
 }
 
-#calendar h2 {
+.calendar-container h2 {
   text-align: center;
   margin: 0;
   padding: 20px 0; 
   font-size: 24px;
 }
 
-#calendar table {
+.calendar-container table {
   width: 100%;
   border-collapse: collapse;
 }
 
-#calendar th,
-#calendar td {
+.calendar-container th,
+.calendar-container td {
   padding: 20px;
   text-align: center;
   font-size: 18px; 
 }
 
-#calendar th {
+.calendar-container th {
   background-color: #eee;
 }
 
-#calendar td {
+.calendar-container td {
   border: 1px solid #ccc;
 }
 
-#calendar td:hover {
+.calendar-container td:hover {
   background-color: #f5f5f5;
 }
 
 /* Estilos para los botones de navegación */
-#calendar .nav-button {
+.calendar-container .nav-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +146,7 @@ a{
   cursor: pointer;
 }
 
-#calendar .nav-button svg {
+.calendar-container .nav-button svg {
   width: 20px; 
   height: 20px;
   fill: black;
@@ -157,6 +157,7 @@ a{
   align-items: center;
   justify-content: space-between;
 }
+
 
 
 
