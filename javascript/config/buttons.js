@@ -5,7 +5,7 @@ function buttonsEvents() {
   <button class="nav-buttons" data-category="sports" >Sports</button>
   <button class="nav-buttons" data-category="business">Business</button>
   <button class="nav-buttons" data-category="food" >Food</button>
-  <button class="nav-buttons" data-category="art" >Art</button>>`;
+  <button class="nav-buttons" data-category="art" >Art</button>`;
 }
 
 function buttonsMyCount() {
@@ -17,4 +17,4 @@ function buttonsMyCount() {
   <button class="nav-buttons" id="calender-tab" data-category="Calendar">Calendar</button>`;
 }
 
-export { buttonsEvents, buttonsMyCount};
+export { buttonsEvents, buttonsMyCount };

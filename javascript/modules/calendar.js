@@ -126,6 +126,3 @@ function showCalendar() {
 }
 
 export { showCalendar }
-
-
-window.addEventListener("load", loadCalendar);

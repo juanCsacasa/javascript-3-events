@@ -1,6 +1,6 @@
-import { buttonsEvents } from "./config/buttons.js";
-import { handleButtonClick } from "./modules/ids.js";
-import { handleCategoryChange, renderEvents } from "./modules/render.js";
+import { buttonsEvents } from "../config/buttons.js";
+import { handleButtonClick } from "../modules/ids.js";
+import { handleCategoryChange, renderEvents } from "../modules/render.js";
 
 
 buttonsEvents();

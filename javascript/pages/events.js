@@ -1,6 +1,6 @@
-import { buttonsMyCount } from "./config/buttons.js";
-import { showCalendar } from "./modules/calendar.js";
-import { renderFavoritesTab, renderGoingTab, renderInterestedTab } from "./modules/favorites.js";
+import { buttonsMyCount } from "../config/buttons.js";
+import { showCalendar } from "../modules/calendar.js";
+import { renderFavoritesTab, renderGoingTab, renderInterestedTab } from "../modules/favorites.js";
 // import { handleCategoryChange } from "./modules/render.js";
 
 buttonsMyCount();

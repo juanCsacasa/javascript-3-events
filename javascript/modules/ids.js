@@ -3,4 +3,4 @@ function handleButtonClick(event) {
   console.log("ID del tab activo:", categoryId);
 }
 
-export {handleButtonClick};
+export { handleButtonClick };

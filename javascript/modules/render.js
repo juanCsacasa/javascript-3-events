@@ -1,6 +1,6 @@
-import { eventCache } from "../patrons/proxy.js";
+import { eventCache } from "../patterns/cache.js";
 import { formatDate, formatLocation, formatPrice } from "../utils/format.js";
-import { handleFavoriteButtonClick, handleInterestedButtonClick,handleGoingButtonClick} from "./favorites.js";
+import { handleFavoriteButtonClick, handleInterestedButtonClick, handleGoingButtonClick } from "./favorites.js";
 
 
 const eventContainer = document.getElementById("event");
@@ -15,7 +15,7 @@ async function renderEvents(category) {
 }
 
 function handleCategoryChange(category) {
-  return function(event) {
+  return function (event) {
     event.preventDefault();
     renderEvents(category);
   };
@@ -73,4 +73,4 @@ function renderEventCard(event) {
   eventContainer.appendChild(card);
 }
 
-export { handleCategoryChange, renderEvents, createEventElement, renderEventCard};
+export { handleCategoryChange, renderEvents, createEventElement, renderEventCard };

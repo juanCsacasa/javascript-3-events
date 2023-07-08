@@ -1,7 +1,9 @@
-import { getData,updateData } from '../patrons/singleton.js';
+import { getData, updateData } from '../patterns/state.js';
 import { renderEventCard } from './render.js';
 
-const handleFavoriteButtonClick = (eventId) => {
+const handleFavoriteButtonClick = (event) => {
+  const eventId = event.dataset.category;
+
   const { favorites } = getData();
   const updatedFavorites = [...favorites];
 
@@ -55,7 +57,6 @@ const handleGoingButtonClick = (eventId) => {
   updateData({ interested: updatedInterested, going: updatedGoing });
 };
 
-
 function renderFavoritesTab() {
   const { favorites } = getData();
   const favoritesTabContent = document.getElementById('event');
@@ -103,4 +104,4 @@ function renderGoingTab() {
     });
   }
 }
-export { handleFavoriteButtonClick, handleInterestedButtonClick, handleGoingButtonClick, renderFavoritesTab, renderInterestedTab, renderGoingTab};
+export { handleFavoriteButtonClick, handleInterestedButtonClick, handleGoingButtonClick, renderFavoritesTab, renderInterestedTab, renderGoingTab };
