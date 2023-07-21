@@ -100,8 +100,6 @@ a{
   max-width: 800px; 
   margin: 0 auto;
   padding: 40px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
 }
 
 .calendar-container h2 {
@@ -121,10 +119,6 @@ a{
   padding: 20px;
   text-align: center;
   font-size: 18px; 
-}
-
-.calendar-container th {
-  background-color: #eee;
 }
 
 .calendar-container td {

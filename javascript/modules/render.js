@@ -1,9 +1,17 @@
 import { eventCache } from "../patterns/cache.js";
 import { formatDate, formatLocation, formatPrice } from "../utils/format.js";
-import { handleFavoriteButtonClick, handleInterestedButtonClick, handleGoingButtonClick } from "./favorites.js";
+import { handleFavoriteButtonClick, handleGoingButtonClick, handleInterestedButtonClick} from "./eventfavorites.js";
 
 
 const eventContainer = document.getElementById("event");
+
+function displayEvents(events) {
+  eventContainer.innerHTML = "";
+  const eventElements = events.map((event) => createEventElement(event));
+  eventElements.forEach((eventElement) => {
+    eventContainer.appendChild(eventElement);
+  });
+}
 
 async function renderEvents(category) {
   try {
@@ -14,21 +22,10 @@ async function renderEvents(category) {
   }
 }
 
-function handleCategoryChange(category) {
-  return function (event) {
-    event.preventDefault();
-    renderEvents(category);
-  };
-}
-
-function displayEvents(events) {
-  eventContainer.innerHTML = "";
-
-  for (const event of events) {
-    const eventElement = createEventElement(event);
-    eventContainer.appendChild(eventElement);
-  }
-}
+const handleCategoryChange = (category) => (event) => {
+  event.preventDefault();
+  renderEvents(category);
+};
 
 function createEventElement(event) {
   const eventElement = document.createElement('div');
@@ -40,10 +37,13 @@ function createEventElement(event) {
     <p class="event-date">${formatDate(event.date)}</p>
     <p class="event-location">${formatLocation(event.location)}</p>
     <p class="event-price">${formatPrice(event.price)}</p>
-    <button class="interested-event" data-event-id="${event.id}">interested</button>
-    <button class="going-event" data-event-id="${event.id}">going</button>
-    <button class="love-event" data-event-id="${event.id}">love</button>
+    <button class="interested-event" id="${event.id}">interested</button>
+    <button class="going-event" id="${event.id}">going</button>
+    <button class="love-event" id="${event.id}">love</button>
   `;
+
+  const loveButton = eventElement.querySelector('.love-event');
+  loveButton.addEventListener('click', handleFavoriteButtonClick);
 
   const interestedButton = eventElement.querySelector('.interested-event');
   interestedButton.addEventListener('click', handleInterestedButtonClick);
@@ -51,26 +51,7 @@ function createEventElement(event) {
   const goingButton = eventElement.querySelector('.going-event');
   goingButton.addEventListener('click', handleGoingButtonClick);
 
-  const loveButton = eventElement.querySelector('.love-event');
-  loveButton.addEventListener('click', handleFavoriteButtonClick);
-
   return eventElement;
 }
 
-function renderEventCard(event) {
-  const eventContainer = document.getElementById('event');
-
-  const card = document.createElement('div');
-  card.classList.add('event-card');
-  card.innerHTML = `
-    <img class="event-image" src="${event.image}">
-    <h2 class="event-title">${event.title}</h2>
-    <p class="event-date">${formatDate(event.date)}</p>
-    <p class="event-location">${formatLocation(event.location)}</p>
-    <p class="event-price">${formatPrice(event.price)}</p>
-  `;
-
-  eventContainer.appendChild(card);
-}
-
-export { handleCategoryChange, renderEvents, createEventElement, renderEventCard };
+export { handleCategoryChange, renderEvents, createEventElement};

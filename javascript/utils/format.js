@@ -1,4 +1,3 @@
-
 function formatDate(date) {
   const options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
   const formattedDate = new Date(date).toLocaleString('en-US', options);

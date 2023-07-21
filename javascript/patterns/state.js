@@ -1,15 +1,19 @@
-let data = {
-  favorites: [],
-  interested: [],
-  going: [],
-};
+class state {
+constructor () {
+    if (!state.instance) {
+      state.instance = this
+    }
+    return state.instance
+  }
 
-const getData = () => ({ ...data });
+  getState = (key) => {
+    const storedState = localStorage.getItem(key);
+    return storedState ? JSON.parse(storedState) : null;
+  };
+  
+  setState = (key, value) => {
+    localStorage.setItem(key , JSON.stringify(value));
+  };
+}
 
-const updateData = (updatedData) => {
-  data = { ...data, ...updatedData };
-};
-
-export { getData, updateData };
-
-
+export  { state };
