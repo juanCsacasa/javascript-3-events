@@ -1,5 +1,4 @@
 import { buttonsEvents } from "../config/buttons.js";
-import { handleButtonClick } from "../modules/ids.js";
 import { handleCategoryChange, renderEvents } from "../modules/render.js";
 import { state } from "../patterns/state.js";
 
@@ -12,15 +11,10 @@ if (localState.getState('favorites') === null) {
   localState.setState('favorites', [])
   localState.setState('interested', [])
   localState.setState('going', [])
-
 }
 
 document.querySelectorAll('.nav-buttons').forEach(button => {
   button.addEventListener('click', handleCategoryChange(button.dataset.category));
-});
-
-document.querySelectorAll(".nav-buttons").forEach(button => {
-  button.addEventListener("click", handleButtonClick);
 });
 
 renderEvents('music');

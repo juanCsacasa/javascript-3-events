@@ -17,19 +17,35 @@ const handleGoingButtonClick = event => {
   const eventId = event.target.id;
   const going = localState.getState('going');
   const selectedEventGoing = findEventById(eventId); 
+  let interested = localState.getState('interested');
+  
   if (!going.some(element => element.id === selectedEventGoing.id)) {
+    if (interested.some(element => element.id === selectedEventGoing.id)) {
+      interested = interested.filter(element => element.id !==  selectedEventGoing.id);
+      localState.setState('interested', interested);
+    }
     going.push(selectedEventGoing);
     localState.setState( 'going', going);
   }
+
 };
 
 const handleInterestedButtonClick = event => {
   const eventId = event.target.id;
   const interested = localState.getState('interested');
   const selectedEventInterested = findEventById(eventId); 
-  if (!interested.some(element => element.id === selectedEventInterested.id)) {
+  const going = localState.getState('going');
+
+  if ((!interested.some(element => element.id === selectedEventInterested.id)) && (!going.some(element => element.id === selectedEventInterested.id))) {
     interested.push(selectedEventInterested);
     localState.setState( 'interested', interested);
+  }else{
+    if (interested.some(element => element.id === selectedEventInterested.id)) {
+      console.log('Este evento ya existe en la lista de interesados');
+    }
+    if (going.some(element => element.id === selectedEventInterested.id)) {
+      console.log('Este evento ya existe en la lista de eventos a los que planeas asistir');
+    }
   }
 };
 
@@ -46,9 +62,13 @@ function findEventById(eventId) {
   return null; // Si no se encuentra el evento, devolvemos null
 }
 
-
 function displayEvents(events) {
 const eventContainer = document.getElementById("event");
+const calendarContainer = document.getElementById("calendar");
+if (calendarContainer) {
+  calendarContainer.style.display = "none";
+  eventContainer.style.display = "grid";
+}
   eventContainer.innerHTML = " ";
   const eventElements = events.map((event) => createEventElement(event));
   eventElements.forEach((eventElement) => {
@@ -59,7 +79,6 @@ const eventContainer = document.getElementById("event");
 function renderEvents(category) {
     const events = localState.getState(category);
     displayEvents(events);
-    console.log("hola");
 }
 
 const handleCategoryChange = (category) => (event) => {

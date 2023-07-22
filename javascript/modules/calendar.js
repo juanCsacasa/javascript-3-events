@@ -106,15 +106,11 @@ function showCalendar() {
   const calendarContainer = document.getElementById("calendar");
 
   // Verifica si el calendario ya está visible
-  const isCalendarVisible = calendarContainer.style.display === "block";
+  const gridContainer = document.getElementById('event');
 
-  if (isCalendarVisible) {
-    // Si el calendario está visible, ocúltalo
-    calendarContainer.style.display = "none";
-  } else {
     // Si el calendario no está visible, muéstralo
     calendarContainer.style.display = "block";
-
+    gridContainer.style.display = "none";
     // Obtén la fecha actual
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -122,7 +118,6 @@ function showCalendar() {
 
     // Renderiza el calendario actual
     renderCalendar(currentYear, currentMonth);
-  }
 }
 
 export { showCalendar }
